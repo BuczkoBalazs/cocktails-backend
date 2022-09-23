@@ -22,7 +22,7 @@ exports.typeDefs = gql`
   type Cocktail {
     id: ID!
     name: String!
-    howto: String!
+    howTo: String!
     ingredients: String!
     image: String!
     favourite: Boolean!
