@@ -17,6 +17,9 @@ exports.typeDefs = gql`
     addLandingSlide(input: AddLandingSlideInput!): LandingSlide!
     deleteLandingSlide(id: ID!): Boolean!
     updateLandingSlide(id: ID!, input: UpdateLandingSlideInput!): LandingSlide!
+    addReview(input: AddReviewInput!): Review!
+    deleteReview(id: ID!): Boolean!
+    updateReview(id: ID!, input: UpdateReviewInput!): Review!
   }
 
   type Cocktail {
@@ -69,6 +72,20 @@ exports.typeDefs = gql`
   input UpdateLandingSlideInput {
     title: String!
     text: String!
+  }
+
+  input AddReviewInput {
+    title: String!
+    text: String!
+    postedBy: ID!
+    cocktailID: ID!
+  }
+
+  input UpdateReviewInput {
+    title: String!
+    text: String!
+    postedBy: ID
+    cocktailID: ID!
   }
 
 `;
