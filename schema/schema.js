@@ -23,6 +23,9 @@ exports.typeDefs = gql`
     addUser(input: AddUserInput!): User!
     deleteUser(id: ID!): Boolean!
     updateUser(id: ID!, input: UpdateUserInput!): User!
+    addCocktail(input: AddCocktailInput!): Cocktail!
+    deleteCocktail(id: ID!): Boolean!
+    updateCocktail(id: ID!, input: UpdateCocktailInput!): Cocktail!
   }
 
   type Cocktail {
@@ -101,6 +104,24 @@ exports.typeDefs = gql`
     name: String!
     email: String!
     age: Int!
+  }
+
+  input AddCocktailInput {
+    name: String!
+    howTo: String!
+    ingredients: String!
+    image: String!
+    favorite: Boolean!
+    userFav: [ID!]!
+  }
+
+  input UpdateCocktailInput {
+    name: String!
+    howTo: String!
+    ingredients: String!
+    image: String!
+    favorite: Boolean!
+    userFav: [ID!]!
   }
 
 `;

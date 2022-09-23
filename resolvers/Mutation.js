@@ -70,6 +70,7 @@ exports.Mutation = {
     },
     deleteUser: (parent, { id }, { db } ) => {
         db.users = db.users.filter(user => user.id !== id);
+        db.reviews = db.reviews.filter(review => review.postedBy !== id)
         return true
     },
     updateUser: (parent, { id, input }, { db }) => {
@@ -79,5 +80,36 @@ exports.Mutation = {
             ...input
         }
         return db.users[index]
+    },
+    addCocktail: (parent, { input }, { db }) => {
+        
+        const { name, howTo, ingredients, image, favorite, userFav } = input;
+        
+        const newCocktail = {
+            id: db.cocktails.length.toString(),
+            name: name,
+            howTo: howTo,
+            ingredients: ingredients,
+            image: image,
+            favorite: favorite,
+            userFav: userFav
+        }
+        
+        db.cocktails.push(newCocktail)
+        
+        return newCocktail
+    },
+    deleteCocktail: (parent, { id }, { db } ) => {
+        db.cocktails = db.cocktails.filter(cocktail => cocktail.id !== id);
+        db.reviews = db.reviews.filter(review => review.cocktailID !== id)
+        return true
+    },
+    updateCocktail: (parent, { id, input }, { db }) => {
+        const index = db.cocktails.findIndex(cocktail => cocktail.id === id);
+        db.cocktails[index] = {
+            ...db.cocktails[index],
+            ...input
+        }
+        return db.cocktails[index]
     }
 }
