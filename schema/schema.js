@@ -25,7 +25,7 @@ exports.typeDefs = gql`
     howTo: String!
     ingredients: String!
     image: String!
-    favourite: Boolean!
+    favorite: Boolean!
     userLiked(filter: UsersFilterInput): [User!]!
     votes: [Vote!]!
   }
