@@ -52,5 +52,32 @@ exports.Mutation = {
             ...input
         }
         return db.reviews[index]
+    },
+    addUser: (parent, { input }, { db }) => {
+        
+        const { name, email, age } = input;
+        
+        const newUser = {
+            id: db.users.length.toString(),
+            name: name,
+            email: email,
+            age: age
+        }
+        
+        db.users.push(newUser)
+        
+        return newUser
+    },
+    deleteUser: (parent, { id }, { db } ) => {
+        db.users = db.users.filter(user => user.id !== id);
+        return true
+    },
+    updateUser: (parent, { id, input }, { db }) => {
+        const index = db.users.findIndex(user => user.id === id);
+        db.users[index] = {
+            ...db.users[index],
+            ...input
+        }
+        return db.users[index]
     }
 }

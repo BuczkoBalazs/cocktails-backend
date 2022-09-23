@@ -20,6 +20,9 @@ exports.typeDefs = gql`
     addReview(input: AddReviewInput!): Review!
     deleteReview(id: ID!): Boolean!
     updateReview(id: ID!, input: UpdateReviewInput!): Review!
+    addUser(input: AddUserInput!): User!
+    deleteUser(id: ID!): Boolean!
+    updateUser(id: ID!, input: UpdateUserInput!): User!
   }
 
   type Cocktail {
@@ -86,6 +89,18 @@ exports.typeDefs = gql`
     text: String!
     postedBy: ID
     cocktailID: ID!
+  }
+
+  input AddUserInput {
+    name: String!
+    email: String!
+    age: Int!
+  }
+
+  input UpdateUserInput {
+    name: String!
+    email: String!
+    age: Int!
   }
 
 `;
