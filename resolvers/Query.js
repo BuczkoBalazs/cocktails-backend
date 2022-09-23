@@ -6,7 +6,7 @@ exports.Query = {
     cocktails: (parent, { filter }, { db }) => {
       return filter ?
       db.cocktails.filter(cocktail => cocktail.name.toLowerCase().includes(filter.name.toLowerCase())) :
-      cocktails
+      db.cocktails
     },
     landingSlide: (parent, { id }, { db }) => {
         const slide = db.landingSlides.find(slide => slide.id === id)
