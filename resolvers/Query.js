@@ -22,9 +22,9 @@ exports.Query = {
       db.users.filter(user => user.age > filter.age) :
       db.users
     },
-    vote: (parent, { id }, { db }) => {
-        const vote = db.votes.find(vote => vote.id === id)
-        return vote ? vote : null 
+    review: (parent, { id }, { db }) => {
+        const review = db.reviews.find(review => review.id === id)
+        return review ? review : null 
       },
-    votes: (parent, args, { db }) => db.votes,
+    reviews: (parent, args, { db }) => db.reviews,
 };

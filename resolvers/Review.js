@@ -1,4 +1,4 @@
-exports.Vote = {
+exports.Review = {
     postedBy: ({ postedBy }, args, { db }) => {
         return db.users.find( user => user.id === postedBy)
     },

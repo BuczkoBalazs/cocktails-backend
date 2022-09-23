@@ -9,8 +9,8 @@ exports.typeDefs = gql`
     landingSlides: [LandingSlide!]!
     user(id: ID!): User
     users(filter: UsersFilterInput): [User!]!
-    vote(id: ID!): Vote
-    votes: [Vote!]!
+    review(id: ID!): Review
+    reviews: [Review!]!
   }
 
   type Mutation {
@@ -27,7 +27,7 @@ exports.typeDefs = gql`
     image: String!
     favorite: Boolean!
     userLiked(filter: UsersFilterInput): [User!]!
-    votes: [Vote!]!
+    reviews: [Review!]!
   }
 
   type LandingSlide {
@@ -42,10 +42,10 @@ exports.typeDefs = gql`
     email: String!
     age: Int!
     cocktails(filter: CocktailsFilterInput): [Cocktail!]!
-    votes: [Vote!]!
+    reviews: [Review!]!
   }
 
-  type Vote {
+  type Review {
     id: ID!
     title: String!
     text: String!

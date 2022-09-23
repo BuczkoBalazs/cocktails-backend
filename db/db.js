@@ -11,7 +11,7 @@ const landingSlides = [
     },
     {
       "id": '2',
-      "title": "favorites section",
+      "title": "Favorites section",
       "text": "Have you checked our cocktails and found some interesting? You can reach them here and save yourselves some time. Life is too short to spend it on searching when you can make a cocktail instead."
     }
   ];
@@ -130,7 +130,7 @@ const landingSlides = [
     }
   ];
 
-  const votes = [
+  const reviews = [
     {
       "id": "0",
       "title": "Absolute the best!",
@@ -158,5 +158,5 @@ const landingSlides = [
     cocktails,
     landingSlides,
     users,
-    votes
+    reviews
   }
