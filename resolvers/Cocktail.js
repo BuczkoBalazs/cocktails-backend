@@ -5,6 +5,6 @@ exports.Cocktail = {
       db.users.filter(user => userFav.includes(user.id))
     },
     reviews: ({ id }, args, { db }) => {
-      return db.votes.filter(vote => vote.cocktailID === id)
+      return db.reviews.filter(review => review.cocktailID === id)
     }
 };
