@@ -70,7 +70,17 @@ exports.Mutation = {
     },
     deleteUser: (parent, { id }, { db } ) => {
         db.users = db.users.filter(user => user.id !== id);
-        db.reviews = db.reviews.filter(review => review.postedBy !== id)
+        db.reviews = db.reviews.filter(review => review.postedBy !== id);
+        db.cocktails = db.cocktails.map(cocktail => {
+            if(cocktail.userFav.includes(id)) {
+                const index = cocktail.userFav.findIndex(userID => userID === id)
+                cocktail = {
+                    ...cocktail,
+                    ...cocktail.userFav.splice(index, 1)
+                }
+            }
+            return cocktail
+        })
         return true
     },
     updateUser: (parent, { id, input }, { db }) => {
