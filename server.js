@@ -1,11 +1,11 @@
-const { ApolloServer } = require('apollo-server');
-const { typeDefs } = require('./schema/schema');
-const { Cocktail } = require('./resolvers/Cocktail');
-const { Query } = require('./resolvers/Query');
-const { Mutation } = require('./resolvers/Mutation');
-const { User } = require('./resolvers/User');
-const { Review } = require('./resolvers/Review')
-const { db } = require('./db/db')
+import { ApolloServer } from 'apollo-server';
+import { typeDefs } from './schema/schema';
+import { Cocktail } from './resolvers/Cocktail';
+import { Query } from './resolvers/Query';
+import { Mutation } from './resolvers/Mutation';
+import { User } from './resolvers/User';
+import { Review } from './resolvers/Review';
+import { db } from './db/db';
 
 const server = new ApolloServer({
   typeDefs,
