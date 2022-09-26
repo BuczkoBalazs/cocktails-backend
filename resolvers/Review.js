@@ -1,4 +1,4 @@
-exports.Review = {
+export const Review = {
     postedBy: ({ postedBy }, args, { db }) => {
         return db.users.find( user => user.id === postedBy)
     },

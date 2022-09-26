@@ -1,4 +1,4 @@
-exports.Query = {
+export const Query = {
     cocktail: (parent, { id }, { db }) => {
         const cocktail = db.cocktails.find(cocktail => cocktail.id === id)
         return cocktail ? cocktail : null 

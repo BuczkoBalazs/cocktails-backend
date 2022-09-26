@@ -154,7 +154,7 @@ const landingSlides = [
     }
   ];
 
-  exports.db = {
+  export const db = {
     cocktails,
     landingSlides,
     users,

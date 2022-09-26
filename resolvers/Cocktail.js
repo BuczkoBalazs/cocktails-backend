@@ -1,4 +1,4 @@
-exports.Cocktail = {
+export const Cocktail = {
     userLiked: ({ userFav }, { filter }, { db }) => {
       return filter ?
       db.users.filter(user => userFav.includes(user.id) && user.age > filter.age) :

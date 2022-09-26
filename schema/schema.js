@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
 
-exports.typeDefs = gql`
+export const typeDefs = gql`
   type Query {
     cocktail(id: ID!): Cocktail
     cocktails(filter: CocktailsFilterInput): [Cocktail!]!

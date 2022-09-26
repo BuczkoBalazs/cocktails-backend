@@ -1,4 +1,4 @@
-exports.Mutation = {
+export const Mutation = {
     addLandingSlide: (parent, { input }, { db }) => {
 
         const { title, text } = input;
