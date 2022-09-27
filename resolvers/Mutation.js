@@ -1,125 +1,165 @@
 export const Mutation = {
-    addLandingSlide: (parent, { input }, { db }) => {
+    addLandingSlide: async (parent, { input }, { prisma }) => {
 
-        const { title, text } = input;
-
-        const newLandingSlide = {
-            id: db.landingSlides.length.toString(),
-            title: input.title,
-            text: input.text
-        }
-
-        db.landingSlides.push(newLandingSlide)
+        const newLandingSlide = await prisma.landingSlide.create({
+            data: { ...input }
+        })
 
         return newLandingSlide
     },
-    deleteLandingSlide: (parent, { id }, { db } ) => {
-        db.landingSlides = db.landingSlides.filter(slide => slide.id !== id);
+    deleteLandingSlide: async (parent, { id }, { prisma } ) => {
+        await prisma.landingSlide.delete({
+            where: {
+                id: parseInt(id)
+            }
+        })
+
         return true
     },
-    updateLandingSlide: (parent, { id, input }, { db }) => {
-        const index = db.landingSlides.findIndex(slide => slide.id === id);
-        db.landingSlides[index] = {
-            ...db.landingSlides[index],
-            ...input
-        }
-        return db.landingSlides[index]
+    updateLandingSlide: async (parent, { id, input }, { prisma }) => {
+        const updateLandingSlide = await prisma.landingSlide.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                ...input
+            }
+        });
+
+        return updateLandingSlide
     },
-    addReview: (parent, { input }, { db }) => {
-        
-        const { title, text, postedBy, cocktailID } = input;
-        
-        const newReview = {
-            id: db.reviews.length.toString(),
-            title: title,
-            text: text,
-            postedBy: postedBy,
-            cocktailID: cocktailID
-        }
-        
-        db.reviews.push(newReview)
+    addReview: async (parent, { input }, { prisma }) => {
+        const newReview = await prisma.review.create({
+            data: { ...input }
+        });
         
         return newReview
     },
-    deleteReview: (parent, { id }, { db } ) => {
-        db.reviews = db.reviews.filter(review => review.id !== id);
+    deleteReview: async (parent, { id }, { prisma } ) => {
+        await prisma.review.delete({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        
         return true
     },
-    updateReview: (parent, { id, input }, { db }) => {
-        const index = db.reviews.findIndex(review => review.id === id);
-        db.reviews[index] = {
-            ...db.reviews[index],
-            ...input
-        }
-        return db.reviews[index]
+    updateReview: async (parent, { id, input }, { prisma }) => {
+        const updateReview = await prisma.review.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                ...input
+            }
+        });
+
+        return updateReview
     },
-    addUser: (parent, { input }, { db }) => {
-        
-        const { name, email, age } = input;
-        
-        const newUser = {
-            id: db.users.length.toString(),
-            name: name,
-            email: email,
-            age: age
-        }
-        
-        db.users.push(newUser)
+    addUser: async (parent, { input }, { prisma }) => {
+        const newUser = await prisma.user.create({
+            data:{ ...input }
+        });
         
         return newUser
     },
-    deleteUser: (parent, { id }, { db } ) => {
-        db.users = db.users.filter(user => user.id !== id);
-        db.reviews = db.reviews.filter(review => review.postedBy !== id);
-        db.cocktails = db.cocktails.map(cocktail => {
-            if(cocktail.userFav.includes(id)) {
-                const index = cocktail.userFav.findIndex(userID => userID === id)
-                cocktail = {
-                    ...cocktail,
-                    ...cocktail.userFav.splice(index, 1)
+    deleteUser: async (parent, { id }, { prisma } ) => {
+        const deleteReviews = prisma.review.deleteMany({
+            where: {
+              userID: parseInt(id),
+            },
+        })
+          
+        const deleteUser = prisma.user.delete({
+            where: {
+              id: parseInt(id)
+            },
+        })
+
+        const deleteCocktailOfUser = prisma.cocktail.updateMany({
+            where: {
+                users: {
+                    some: {
+                      id: {
+                        in: id
+                      }
+                    }
+                }
+            },
+            data: {
+                users: {
+                    disconnect: [{ id: id}]
                 }
             }
-            return cocktail
         })
+          
+        const transaction = await prisma.$transaction([ deleteReviews, deleteUser, deleteCocktailOfUser ])
+
         return true
     },
-    updateUser: (parent, { id, input }, { db }) => {
-        const index = db.users.findIndex(user => user.id === id);
-        db.users[index] = {
-            ...db.users[index],
-            ...input
-        }
-        return db.users[index]
+    updateUser: async (parent, { id, input }, { prisma }) => {
+        const updateUser = await prisma.user.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                ...input
+            }
+        });
+
+        return updateUser
     },
-    addCocktail: (parent, { input }, { db }) => {
-        
-        const { name, howTo, ingredients, image, favorite, userFav } = input;
-        
-        const newCocktail = {
-            id: db.cocktails.length.toString(),
-            name: name,
-            howTo: howTo,
-            ingredients: ingredients,
-            image: image,
-            favorite: favorite,
-            userFav: userFav
-        }
-        
-        db.cocktails.push(newCocktail)
-        
+    addCocktail: async (parent, { input }, { prisma }) => {
+        const newCocktail = await prisma.cocktail.create({
+            data: { ...input }
+        });
+
         return newCocktail
     },
-    deleteCocktail: (parent, { id }, { db } ) => {
-        db.cocktails = db.cocktails.filter(cocktail => cocktail.id !== id);
-        db.reviews = db.reviews.filter(review => review.cocktailID !== id)
+    deleteCocktail: async (parent, { id }, { prisma } ) => {
+        const deleteReviews = prisma.review.deleteMany({
+            where: {
+              cocktailID: parseInt(id),
+            },
+        })
+          
+        const deleteCocktail = prisma.cocktail.delete({
+            where: {
+              id: parseInt(id)
+            },
+        })
+
+        const deleteUserOfCocktail = prisma.users.updateMany({
+            where: {
+                cocktails: {
+                    some: {
+                      id: {
+                        in: id
+                      }
+                    }
+                }
+            },
+            data: {
+                cocktails: {
+                    disconnect: [{ id: id}]
+                }
+            }
+        })
+          
+        const transaction = await prisma.$transaction([ deleteReviews, deleteCocktail, deleteUserOfCocktail ])
+
         return true
     },
-    updateCocktail: (parent, { id, input }, { db }) => {
-        const index = db.cocktails.findIndex(cocktail => cocktail.id === id);
-        db.cocktails[index] = {
-            ...db.cocktails[index],
-            ...input
-        }
-        return db.cocktails[index]
+    updateCocktail: async (parent, { id, input }, { prisma }) => {        
+        const updateCocktail = await prisma.cocktail.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                ...input
+            }
+        });
+
+        return updateCocktail
     }
 }
