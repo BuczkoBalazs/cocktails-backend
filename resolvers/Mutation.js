@@ -36,16 +36,17 @@ export const Mutation = {
 
     addReview: async (parent, { input }, { prisma }) => {
 
+        const { title, text, userID, cocktailID} = input
+
         const newReview = await prisma.review.create({
             data: {
-                title: input.title,
-                text: input.text,
-                userID: parseInt(input.userID),
-                cocktailID: parseInt(input.cocktailID)
+                title: title,
+                text: text,
+                userID: parseInt(userID),
+                cocktailID: parseInt(cocktailID)
             }
         });
         
-        console.log(newReview)
         return newReview
 
     },
