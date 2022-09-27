@@ -64,12 +64,17 @@ export const Mutation = {
 
     updateReview: async (parent, { id, input }, { prisma }) => {
 
+        const { title, text, userID, cocktailID} = input
+
         const updateReview = await prisma.review.update({
             where: {
                 id: parseInt(id)
             },
             data: {
-                ...input
+                title: title,
+                text: text,
+                userID: parseInt(userID),
+                cocktailID: parseInt(cocktailID)
             }
         });
 
