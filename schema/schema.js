@@ -82,14 +82,14 @@ export const typeDefs = gql`
   input AddReviewInput {
     title: String!
     text: String!
-    postedBy: ID!
+    userID: ID!
     cocktailID: ID!
   }
 
   input UpdateReviewInput {
     title: String!
     text: String!
-    postedBy: ID
+    userID: ID!
     cocktailID: ID!
   }
 
