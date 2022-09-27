@@ -1,5 +1,7 @@
 export const User = {
+
   cocktails: async ({ id }, { filter }, { prisma }) => {
+
     if(filter) {
       const cocktailOfUser = await prisma.cocktail.findMany({
         where: {
@@ -34,7 +36,9 @@ export const User = {
       return cocktailOfUser
     }
   },
+
   reviews: async ({ id }, args, { prisma }) => {
+
     const userReviews = await prisma.review.findMany({
       where: {
         userID: id
@@ -43,4 +47,5 @@ export const User = {
 
     return userReviews
   }
+  
 };
