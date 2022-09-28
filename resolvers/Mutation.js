@@ -103,25 +103,8 @@ export const Mutation = {
               id: parseInt(id)
             },
         })
-
-        const deleteCocktailOfUser = prisma.cocktail.updateMany({
-            where: {
-                users: {
-                    some: {
-                      id: {
-                        in: id
-                      }
-                    }
-                }
-            },
-            data: {
-                users: {
-                    disconnect: [{ id: id}]
-                }
-            }
-        })
           
-        const transaction = await prisma.$transaction([ deleteReviews, deleteUser, deleteCocktailOfUser ])
+        const transaction = await prisma.$transaction([ deleteReviews, deleteUser ])
 
         return true
     },
