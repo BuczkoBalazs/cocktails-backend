@@ -1,8 +1,25 @@
 export const Review = {
-    postedBy: ({ postedBy }, args, { db }) => {
-        return db.users.find( user => user.id === postedBy)
+
+    userID: async ({ userID }, args, { prisma }) => {
+
+        const userOfReview =  await prisma.user.findUnique({
+            where: {
+                id: userID
+            },
+        })
+
+        return userOfReview
     },
-    cocktailID: ({ cocktailID }, args, { db}) => {
-        return db.cocktails.find( cocktail => cocktail.id === cocktailID)
+
+    cocktailID: async ({ cocktailID }, args, { prisma }) => {
+
+        const cocktailOfReview =  await prisma.cocktail.findUnique({
+            where: {
+                id: cocktailID
+            },
+        })
+
+        return cocktailOfReview
     }
+    
 };

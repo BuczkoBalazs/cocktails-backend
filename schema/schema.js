@@ -34,7 +34,7 @@ export const typeDefs = gql`
     ingredients: String!
     image: String!
     favorite: Boolean!
-    userLiked(filter: UsersFilterInput): [User!]!
+    users(filter: UsersFilterInput): [User!]!
     reviews: [Review!]!
   }
 
@@ -57,7 +57,7 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     text: String!
-    postedBy: User!
+    userID: User!
     cocktailID: Cocktail!
   }
 
@@ -82,14 +82,14 @@ export const typeDefs = gql`
   input AddReviewInput {
     title: String!
     text: String!
-    postedBy: ID!
+    userID: ID!
     cocktailID: ID!
   }
 
   input UpdateReviewInput {
     title: String!
     text: String!
-    postedBy: ID
+    userID: ID!
     cocktailID: ID!
   }
 
@@ -111,7 +111,6 @@ export const typeDefs = gql`
     ingredients: String!
     image: String!
     favorite: Boolean!
-    userFav: [ID!]!
   }
 
   input UpdateCocktailInput {
@@ -120,7 +119,5 @@ export const typeDefs = gql`
     ingredients: String!
     image: String!
     favorite: Boolean!
-    userFav: [ID!]!
   }
-
 `;
