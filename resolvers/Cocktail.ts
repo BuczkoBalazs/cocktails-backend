@@ -1,6 +1,8 @@
+import { PrismaClient } from "@prisma/client";
+
 export const Cocktail = {
   
-  users: async ({ id }, { filter }, { prisma }) => {
+  users: async ({ id }: { id: number }, { filter }: { filter: { age: number }}, { prisma }: { prisma: PrismaClient }) => {
 
     if(filter) {
       const userOfCocktail = await prisma.user.findMany({
@@ -37,7 +39,7 @@ export const Cocktail = {
     }
   },
   
-  reviews: async ({ id }, args, { prisma }) => {
+  reviews: async ({ id }: { id: number}, args: any, { prisma }: { prisma: PrismaClient }) => {
 
     const cocktailReviews = await prisma.review.findMany({
       where: {
