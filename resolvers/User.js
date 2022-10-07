@@ -1,10 +1,51 @@
-exports.User = {
-    cocktails: ({ id }, { filter }, { db }) => {
-      return filter ? 
-      db.cocktails.filter(cocktail => cocktail.userFav.includes(id) && cocktail.name.toLowerCase().includes(filter.name.toLowerCase())) :
-      db.cocktails.filter(cocktail => cocktail.userFav.includes(id))
-    },
-    votes: ({ id }, args, { db }) => {
-      return db.votes.filter(vote => vote.postedBy === id)
+export const User = {
+
+  cocktails: async ({ id }, { filter }, { prisma }) => {
+
+    if(filter) {
+      const cocktailOfUser = await prisma.cocktail.findMany({
+        where: {
+          name: {
+            contains: filter.name
+          },
+          users: {
+            some: {
+              id: {
+                in: id
+              }
+            }
+          }
+        }
+      })
+
+      return cocktailOfUser
+
+    } else {
+      const cocktailOfUser = await prisma.cocktail.findMany({
+        where: {
+          users: {
+            some: {
+              id: {
+                in: id
+              }
+            }
+          }
+        }
+      })
+
+      return cocktailOfUser
     }
+  },
+
+  reviews: async ({ id }, args, { prisma }) => {
+
+    const userReviews = await prisma.review.findMany({
+      where: {
+        userID: id
+      }
+    })
+
+    return userReviews
+  }
+  
 };

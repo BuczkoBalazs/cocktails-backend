@@ -1,7 +1,6 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server';
 
-
-exports.typeDefs = gql`
+export const typeDefs = gql`
   type Query {
     cocktail(id: ID!): Cocktail
     cocktails(filter: CocktailsFilterInput): [Cocktail!]!
@@ -9,14 +8,23 @@ exports.typeDefs = gql`
     landingSlides: [LandingSlide!]!
     user(id: ID!): User
     users(filter: UsersFilterInput): [User!]!
-    vote(id: ID!): Vote
-    votes: [Vote!]!
+    review(id: ID!): Review
+    reviews: [Review!]!
   }
 
   type Mutation {
     addLandingSlide(input: AddLandingSlideInput!): LandingSlide!
     deleteLandingSlide(id: ID!): Boolean!
     updateLandingSlide(id: ID!, input: UpdateLandingSlideInput!): LandingSlide!
+    addReview(input: AddReviewInput!): Review!
+    deleteReview(id: ID!): Boolean!
+    updateReview(id: ID!, input: UpdateReviewInput!): Review!
+    addUser(input: AddUserInput!): User!
+    deleteUser(id: ID!): Boolean!
+    updateUser(id: ID!, input: UpdateUserInput!): User!
+    addCocktail(input: AddCocktailInput!): Cocktail!
+    deleteCocktail(id: ID!): Boolean!
+    updateCocktail(id: ID!, input: UpdateCocktailInput!): Cocktail!
   }
 
   type Cocktail {
@@ -25,9 +33,9 @@ exports.typeDefs = gql`
     howTo: String!
     ingredients: String!
     image: String!
-    favourite: Boolean!
-    userLiked(filter: UsersFilterInput): [User!]!
-    votes: [Vote!]!
+    favorite: Boolean!
+    users(filter: UsersFilterInput): [User!]!
+    reviews: [Review!]!
   }
 
   type LandingSlide {
@@ -42,14 +50,14 @@ exports.typeDefs = gql`
     email: String!
     age: Int!
     cocktails(filter: CocktailsFilterInput): [Cocktail!]!
-    votes: [Vote!]!
+    reviews: [Review!]!
   }
 
-  type Vote {
+  type Review {
     id: ID!
     title: String!
     text: String!
-    postedBy: User!
+    userID: User!
     cocktailID: Cocktail!
   }
 
@@ -71,4 +79,45 @@ exports.typeDefs = gql`
     text: String!
   }
 
+  input AddReviewInput {
+    title: String!
+    text: String!
+    userID: ID!
+    cocktailID: ID!
+  }
+
+  input UpdateReviewInput {
+    title: String!
+    text: String!
+    userID: ID!
+    cocktailID: ID!
+  }
+
+  input AddUserInput {
+    name: String!
+    email: String!
+    age: Int!
+  }
+
+  input UpdateUserInput {
+    name: String!
+    email: String!
+    age: Int!
+  }
+
+  input AddCocktailInput {
+    name: String!
+    howTo: String!
+    ingredients: String!
+    image: String!
+    favorite: Boolean!
+  }
+
+  input UpdateCocktailInput {
+    name: String!
+    howTo: String!
+    ingredients: String!
+    image: String!
+    favorite: Boolean!
+  }
 `;
