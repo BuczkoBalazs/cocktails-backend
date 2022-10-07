@@ -15,15 +15,21 @@ export const Query = {
 
   cocktails: async ( parent: any, { filter }: { filter: { name: string }}, { prisma }: { prisma: PrismaClient }) => {
 
-    return filter ?
-    await prisma.cocktail.findMany({
-      where: {
-        name: {
-          contains: filter.name
+    if(filter) {
+      const cocktails = await prisma.cocktail.findMany({
+        where: {
+          name: {
+            contains: filter.name
+          }
         }
-      }
-    }) :
-    await prisma.cocktail.findMany()
+      })
+
+      return cocktails.length ? cocktails : null
+    } else {
+      const cocktails = await prisma.cocktail.findMany();
+
+      return cocktails.length ? cocktails : null
+    }
   },
 
   landingSlide: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
@@ -36,7 +42,13 @@ export const Query = {
     return slide ? slide : null
   },
 
-  landingSlides: async (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => prisma.landingSlide.findMany(),
+  landingSlides: async (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => {
+    
+    const slides = await prisma.landingSlide.findMany();
+
+    return slides.length ? slides : null
+
+  },
 
   user: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
 
@@ -50,15 +62,21 @@ export const Query = {
 
   users: async ( parent: any, { filter }: { filter: { age: number }}, { prisma }: { prisma: PrismaClient } ) => {
 
-    return filter ? 
-    await prisma.user.findMany({
-      where: {
-        age: {
-          gt: filter.age
+    if(filter) {
+      const users = await prisma.user.findMany({
+        where: {
+          age: {
+            gt: filter.age
+          }
         }
-      }
-    }) :
-    await prisma.user.findMany()
+      })
+
+      return users.length ? users : null
+    } else {
+      const users = await prisma.user.findMany();
+
+      return users.length ? users : null
+    }
   },
 
   review: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
@@ -71,6 +89,10 @@ export const Query = {
     return review ? review : null 
   },
 
-  reviews: (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => prisma.review.findMany(),
+  reviews: async (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => {
 
+    const reviews = await prisma.review.findMany();
+
+    return reviews.length ? reviews : null
+  }
 };

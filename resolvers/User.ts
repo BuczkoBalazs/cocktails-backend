@@ -20,7 +20,7 @@ export const User = {
         }
       })
 
-      return cocktailOfUser
+      return cocktailOfUser.length ? cocktailOfUser : null
 
     } else {
       const cocktailOfUser = await prisma.cocktail.findMany({
@@ -35,7 +35,7 @@ export const User = {
         }
       })
 
-      return cocktailOfUser
+      return cocktailOfUser.length ? cocktailOfUser : null
     }
   },
 
@@ -47,7 +47,7 @@ export const User = {
       }
     })
 
-    return userReviews
+    return userReviews.length ? userReviews : null
   }
   
 };
