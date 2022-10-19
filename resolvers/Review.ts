@@ -1,27 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import { ReviewResolvers } from "../src/generated/graphql";
 
-export const Review = {
+export const Review: ReviewResolvers = {
 
-    userID: async ({ userID }: { userID: number}, args: any, { prisma }: { prisma: PrismaClient }) => {
+    userID: async ({ userID }, args, { prisma }) => {
 
-        const userOfReview =  await prisma.user.findUnique({
+        return await prisma.user.findUnique({
             where: {
                 id: userID
             },
         })
-
-        return userOfReview
     },
 
-    cocktailID: async ({ cocktailID }: { cocktailID: number}, args: any, { prisma }: { prisma: PrismaClient }) => {
+    cocktailID: async ({ cocktailID }, args, { prisma }) => {
 
-        const cocktailOfReview =  await prisma.cocktail.findUnique({
+        return  await prisma.cocktail.findUnique({
             where: {
                 id: cocktailID
             },
         })
-
-        return cocktailOfReview
     }
     
 };

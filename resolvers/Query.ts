@@ -1,98 +1,81 @@
-import { PrismaClient } from "@prisma/client";
+import { QueryResolvers } from "../src/generated/graphql";
 
-export const Query = {
+export const Query: QueryResolvers = {
 
-  cocktail: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+  cocktail: async (parent, { id }, { prisma } ) => {
 
-    const cocktail = await prisma.cocktail.findUnique({
+    return await prisma.cocktail.findUnique({
       where: {
         id: parseInt(id),
       },
     })
-
-    return cocktail ? cocktail : null 
   },
 
-  cocktails: async ( parent: any, { filter }: { filter: { name: string }}, { prisma }: { prisma: PrismaClient }) => {
+  cocktails: async ( parent, { filter }, { prisma } ) => {
 
     if(filter) {
-      const cocktails = await prisma.cocktail.findMany({
+      return await prisma.cocktail.findMany({
         where: {
           name: {
             contains: filter.name
           }
         }
       })
-
-      return cocktails.length ? cocktails : null
     } else {
-      const cocktails = await prisma.cocktail.findMany();
-
-      return cocktails.length ? cocktails : null
+      return await prisma.cocktail.findMany();
     }
   },
 
-  landingSlide: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+  landingSlide: async (parent, { id }, { prisma } ) => {
 
-    const slide =  await prisma.landingSlide.findUnique({
+    return await prisma.landingSlide.findUnique({
       where: {
         id: parseInt(id),
       },
     })
-    return slide ? slide : null
   },
 
-  landingSlides: async (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => {
+  landingSlides: async (parent, args, { prisma }) => {
     
-    const slides = await prisma.landingSlide.findMany();
-
-    return slides.length ? slides : null
+    return await prisma.landingSlide.findMany();
 
   },
 
-  user: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+  user: async (parent, { id }, { prisma }) => {
 
-    const user = await prisma.user.findUnique({
+    return await prisma.user.findUnique({
       where: {
         id: parseInt(id),
       },
     })
-    return user ? user : null 
   },
 
-  users: async ( parent: any, { filter }: { filter: { age: number }}, { prisma }: { prisma: PrismaClient } ) => {
+  users: async ( parent, { filter }, { prisma } ) => {
 
     if(filter) {
-      const users = await prisma.user.findMany({
+      return await prisma.user.findMany({
         where: {
           age: {
             gt: filter.age
           }
         }
       })
-
-      return users.length ? users : null
     } else {
-      const users = await prisma.user.findMany();
-
-      return users.length ? users : null
+      return await prisma.user.findMany();
     }
   },
 
-  review: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+  review: async (parent, { id }, { prisma } ) => {
 
-    const review = await prisma.review.findUnique({
+    return await prisma.review.findUnique({
       where: {
         id: parseInt(id),
       },
     })
-    return review ? review : null 
   },
 
-  reviews: async (parent: any, args: any, { prisma }: { prisma: PrismaClient }) => {
+  reviews: async (parent, args, { prisma }) => {
 
-    const reviews = await prisma.review.findMany();
-
-    return reviews.length ? reviews : null
+    return await prisma.review.findMany();
   }
 };

@@ -1,30 +1,27 @@
-import { PrismaClient } from "@prisma/client"
+import { MutationResolvers } from "../src/generated/graphql"
 
-export const Mutation = {
+export const Mutation: MutationResolvers = {
 
-    addLandingSlide: async (parent: any, { input }: { input: { title: string, text: string}}, { prisma }: { prisma: PrismaClient }) => {
+    addLandingSlide: async (parent, { input }, { prisma }) => {
 
-        const newLandingSlide = await prisma.landingSlide.create({
+        return await prisma.landingSlide.create({
             data: { ...input }
         })
-
-        return newLandingSlide
     },
 
-    deleteLandingSlide: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient } ) => {
+    deleteLandingSlide: async (parent, { id }, { prisma } ) => {
         
         await prisma.landingSlide.delete({
             where: {
                 id: parseInt(id)
             }
         })
-
         return true
     },
 
-    updateLandingSlide: async (parent: any, { id, input }: { id: string, input: { title: string, text: string }}, { prisma }: { prisma: PrismaClient }) => {
+    updateLandingSlide: async (parent, { id, input }, { prisma }) => {
 
-        const updateLandingSlide = await prisma.landingSlide.update({
+        return await prisma.landingSlide.update({
             where: {
                 id: parseInt(id)
             },
@@ -32,15 +29,13 @@ export const Mutation = {
                 ...input
             }
         });
-
-        return updateLandingSlide
     },
 
-    addReview: async (parent: any, { input }: { input: { title: string, text: string, userID: string, cocktailID: string}}, { prisma }: { prisma: PrismaClient }) => {
+    addReview: async (parent, { input }, { prisma }) => {
 
         const { title, text, userID, cocktailID} = input
 
-        const newReview = await prisma.review.create({
+        return await prisma.review.create({
             data: {
                 title: title,
                 text: text,
@@ -48,12 +43,9 @@ export const Mutation = {
                 cocktailID: parseInt(cocktailID)
             }
         });
-        
-        return newReview
-
     },
 
-    deleteReview: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+    deleteReview: async (parent, { id }, { prisma }) => {
 
         await prisma.review.delete({
             where: {
@@ -64,11 +56,11 @@ export const Mutation = {
         return true
     },
 
-    updateReview: async (parent: any, { id, input }: { id: string, input: { title: string, text: string, userID: string, cocktailID: string}}, { prisma }: { prisma: PrismaClient }) => {
+    updateReview: async (parent: any, { id, input }, { prisma }) => {
 
         const { title, text, userID, cocktailID} = input
 
-        const updateReview = await prisma.review.update({
+        return await prisma.review.update({
             where: {
                 id: parseInt(id)
             },
@@ -79,20 +71,16 @@ export const Mutation = {
                 cocktailID: parseInt(cocktailID)
             }
         });
-
-        return updateReview
     },
 
-    addUser: async (parent: any, { input }: { input: { name: string, email: string, age: number}} , { prisma }: { prisma: PrismaClient }) => {
+    addUser: async (parent: any, { input } , { prisma }) => {
 
-        const newUser = await prisma.user.create({
+        return await prisma.user.create({
             data:{ ...input }
         });
-        
-        return newUser
     },
 
-    deleteUser: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+    deleteUser: async (parent, { id }, { prisma }) => {
 
         const deleteReviews = prisma.review.deleteMany({
             where: {
@@ -111,7 +99,7 @@ export const Mutation = {
         return true
     },
 
-    updateUser: async (parent: any, { id, input }: { id: string, input: { name: string, email: string, age: number}}, { prisma }: { prisma: PrismaClient }) => {
+    updateUser: async (parent, { id, input }, { prisma }) => {
 
         const updateUser = await prisma.user.update({
             where: {
@@ -125,16 +113,14 @@ export const Mutation = {
         return updateUser
     },
 
-    addCocktail: async (parent: any, { input }: { input: { name: string, howTo: string, ingredients: string, image: string, favorite: boolean}}, { prisma }: { prisma: PrismaClient }) => {
+    addCocktail: async (parent, { input }, { prisma }) => {
 
-        const newCocktail = await prisma.cocktail.create({
+        return await prisma.cocktail.create({
             data: { ...input }
         });
-
-        return newCocktail
     },
 
-    deleteCocktail: async (parent: any, { id }: { id: string }, { prisma }: { prisma: PrismaClient }) => {
+    deleteCocktail: async (parent: any, { id }, { prisma }) => {
 
         const deleteReviews = prisma.review.deleteMany({
             where: {
@@ -153,9 +139,9 @@ export const Mutation = {
         return true
     },
 
-    updateCocktail: async (parent: any, { id, input }: { id: string, input: { name: string, howTo: string, ingredients: string, image: string, favorite: boolean}}, { prisma }: { prisma: PrismaClient }) => {
+    updateCocktail: async (parent, { id, input }, { prisma }) => {
 
-        const updateCocktail = await prisma.cocktail.update({
+        return await prisma.cocktail.update({
             where: {
                 id: parseInt(id)
             },
@@ -163,8 +149,6 @@ export const Mutation = {
                 ...input
             }
         });
-
-        return updateCocktail
     }
 
 }
