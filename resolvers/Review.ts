@@ -2,7 +2,7 @@ import { ReviewResolvers } from "../src/generated/graphql";
 
 export const Review: ReviewResolvers = {
 
-    userID: async ({ userID }, args, { prisma }) => {
+/*     userID: async ({ userID }, args, { prisma }) => {
 
         return await prisma.user.findUnique({
             where: {
@@ -18,6 +18,6 @@ export const Review: ReviewResolvers = {
                 id: cocktailID
             },
         })
-    }
+    } */
     
 };

@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Context } from '../Context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -44,7 +45,7 @@ export type Cocktail = {
   __typename?: 'Cocktail';
   favorite: Scalars['Boolean'];
   howTo: Scalars['String'];
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   image: Scalars['String'];
   ingredients: Scalars['String'];
   name: Scalars['String'];
@@ -58,12 +59,12 @@ export type CocktailUsersArgs = {
 };
 
 export type CocktailsFilterInput = {
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type LandingSlide = {
   __typename?: 'LandingSlide';
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
 };
@@ -193,7 +194,7 @@ export type QueryUsersArgs = {
 export type Review = {
   __typename?: 'Review';
   cocktailID: Cocktail;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
   userID: User;
@@ -213,10 +214,10 @@ export type UpdateLandingSlideInput = {
 };
 
 export type UpdateReviewInput = {
-  cocktailID: Scalars['ID'];
+  cocktailID: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: Scalars['ID'];
+  userID: Scalars['Int'];
 };
 
 export type UpdateUserInput = {
@@ -230,7 +231,7 @@ export type User = {
   age: Scalars['Int'];
   cocktails?: Maybe<Array<Cocktail>>;
   email: Scalars['String'];
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   name: Scalars['String'];
   reviews?: Maybe<Array<Review>>;
 };
@@ -241,10 +242,11 @@ export type UserCocktailsArgs = {
 };
 
 export type UsersFilterInput = {
-  age?: InputMaybe<Scalars['Int']>;
+  age: Scalars['Int'];
 };
 
-
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -312,7 +314,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
+export type ResolversTypes = ResolversObject<{
   AddCocktailInput: AddCocktailInput;
   AddLandingSlideInput: AddLandingSlideInput;
   AddReviewInput: AddReviewInput;
@@ -333,10 +335,10 @@ export type ResolversTypes = {
   UpdateUserInput: UpdateUserInput;
   User: ResolverTypeWrapper<User>;
   UsersFilterInput: UsersFilterInput;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
+export type ResolversParentTypes = ResolversObject<{
   AddCocktailInput: AddCocktailInput;
   AddLandingSlideInput: AddLandingSlideInput;
   AddReviewInput: AddReviewInput;
@@ -357,28 +359,28 @@ export type ResolversParentTypes = {
   UpdateUserInput: UpdateUserInput;
   User: User;
   UsersFilterInput: UsersFilterInput;
-};
+}>;
 
-export type CocktailResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cocktail'] = ResolversParentTypes['Cocktail']> = {
+export type CocktailResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Cocktail'] = ResolversParentTypes['Cocktail']> = ResolversObject<{
   favorite?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   howTo?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   ingredients?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType, Partial<CocktailUsersArgs>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type LandingSlideResolvers<ContextType = any, ParentType extends ResolversParentTypes['LandingSlide'] = ResolversParentTypes['LandingSlide']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+export type LandingSlideResolvers<ContextType = Context, ParentType extends ResolversParentTypes['LandingSlide'] = ResolversParentTypes['LandingSlide']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addCocktail?: Resolver<ResolversTypes['Cocktail'], ParentType, ContextType, RequireFields<MutationAddCocktailArgs, 'input'>>;
   addLandingSlide?: Resolver<ResolversTypes['LandingSlide'], ParentType, ContextType, RequireFields<MutationAddLandingSlideArgs, 'input'>>;
   addReview?: Resolver<ResolversTypes['Review'], ParentType, ContextType, RequireFields<MutationAddReviewArgs, 'input'>>;
@@ -391,9 +393,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateLandingSlide?: Resolver<ResolversTypes['LandingSlide'], ParentType, ContextType, RequireFields<MutationUpdateLandingSlideArgs, 'id' | 'input'>>;
   updateReview?: Resolver<ResolversTypes['Review'], ParentType, ContextType, RequireFields<MutationUpdateReviewArgs, 'id' | 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id' | 'input'>>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   cocktail?: Resolver<Maybe<ResolversTypes['Cocktail']>, ParentType, ContextType, RequireFields<QueryCocktailArgs, 'id'>>;
   cocktails?: Resolver<Maybe<Array<ResolversTypes['Cocktail']>>, ParentType, ContextType, Partial<QueryCocktailsArgs>>;
   landingSlide?: Resolver<Maybe<ResolversTypes['LandingSlide']>, ParentType, ContextType, RequireFields<QueryLandingSlideArgs, 'id'>>;
@@ -402,33 +404,33 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
-};
+}>;
 
-export type ReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
+export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
   cocktailID?: Resolver<ResolversTypes['Cocktail'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userID?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   age?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   cocktails?: Resolver<Maybe<Array<ResolversTypes['Cocktail']>>, ParentType, ContextType, Partial<UserCocktailsArgs>>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = Context> = ResolversObject<{
   Cocktail?: CocktailResolvers<ContextType>;
   LandingSlide?: LandingSlideResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
-};
+}>;
 

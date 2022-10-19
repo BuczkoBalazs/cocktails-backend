@@ -31,7 +31,7 @@ export const Mutation: MutationResolvers = {
         });
     },
 
-    addReview: async (parent, { input }, { prisma }) => {
+/*     addReview: async (parent, { input }, { prisma }) => {
 
         const { title, text, userID, cocktailID} = input
 
@@ -43,7 +43,7 @@ export const Mutation: MutationResolvers = {
                 cocktailID: parseInt(cocktailID)
             }
         });
-    },
+    }, */
 
     deleteReview: async (parent, { id }, { prisma }) => {
 
@@ -56,7 +56,7 @@ export const Mutation: MutationResolvers = {
         return true
     },
 
-    updateReview: async (parent: any, { id, input }, { prisma }) => {
+/*     updateReview: async (parent: any, { id, input }, { prisma }) => {
 
         const { title, text, userID, cocktailID} = input
 
@@ -71,7 +71,7 @@ export const Mutation: MutationResolvers = {
                 cocktailID: parseInt(cocktailID)
             }
         });
-    },
+    }, */
 
     addUser: async (parent: any, { input } , { prisma }) => {
 

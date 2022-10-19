@@ -6,6 +6,10 @@ const config: CodegenConfig = {
   schema: "http://localhost:4000/",
   generates: {
     "src/generated/graphql.ts": {
+      config: {
+        contextType: '../Context#Context',
+        useIndexSignature: true
+      },
       plugins: ["typescript", "typescript-resolvers"]
     }
   }
