@@ -3,13 +3,13 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
   type Query {
     cocktail(id: ID!): Cocktail
-    cocktails(filter: CocktailsFilterInput): [Cocktail!]!
+    cocktails(filter: CocktailsFilterInput): [Cocktail!]
     landingSlide(id: ID!): LandingSlide
-    landingSlides: [LandingSlide!]!
+    landingSlides: [LandingSlide!]
     user(id: ID!): User
-    users(filter: UsersFilterInput): [User!]!
+    users(filter: UsersFilterInput): [User!]
     review(id: ID!): Review
-    reviews: [Review!]!
+    reviews: [Review!]
   }
 
   type Mutation {
@@ -34,8 +34,8 @@ export const typeDefs = gql`
     ingredients: String!
     image: String!
     favorite: Boolean!
-    users(filter: UsersFilterInput): [User!]!
-    reviews: [Review!]!
+    users(filter: UsersFilterInput): [User!]
+    reviews: [Review!]
   }
 
   type LandingSlide {
@@ -49,8 +49,8 @@ export const typeDefs = gql`
     name: String!
     email: String!
     age: Int!
-    cocktails(filter: CocktailsFilterInput): [Cocktail!]!
-    reviews: [Review!]!
+    cocktails(filter: CocktailsFilterInput): [Cocktail!]
+    reviews: [Review!]
   }
 
   type Review {

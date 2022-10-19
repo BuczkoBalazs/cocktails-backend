@@ -1,6 +1,8 @@
+import { PrismaClient } from "@prisma/client";
+
 export const Review = {
 
-    userID: async ({ userID }, args, { prisma }) => {
+    userID: async ({ userID }: { userID: number}, args: any, { prisma }: { prisma: PrismaClient }) => {
 
         const userOfReview =  await prisma.user.findUnique({
             where: {
@@ -11,7 +13,7 @@ export const Review = {
         return userOfReview
     },
 
-    cocktailID: async ({ cocktailID }, args, { prisma }) => {
+    cocktailID: async ({ cocktailID }: { cocktailID: number}, args: any, { prisma }: { prisma: PrismaClient }) => {
 
         const cocktailOfReview =  await prisma.cocktail.findUnique({
             where: {

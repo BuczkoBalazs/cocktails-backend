@@ -1,6 +1,8 @@
+import { PrismaClient } from "@prisma/client";
+
 export const User = {
 
-  cocktails: async ({ id }, { filter }, { prisma }) => {
+  cocktails: async ({ id }: { id: number}, { filter }: { filter: { name: string }}, { prisma }: { prisma: PrismaClient }) => {
 
     if(filter) {
       const cocktailOfUser = await prisma.cocktail.findMany({
@@ -18,7 +20,7 @@ export const User = {
         }
       })
 
-      return cocktailOfUser
+      return cocktailOfUser.length ? cocktailOfUser : null
 
     } else {
       const cocktailOfUser = await prisma.cocktail.findMany({
@@ -33,11 +35,11 @@ export const User = {
         }
       })
 
-      return cocktailOfUser
+      return cocktailOfUser.length ? cocktailOfUser : null
     }
   },
 
-  reviews: async ({ id }, args, { prisma }) => {
+  reviews: async ({ id }: { id: number}, args: any, { prisma }: { prisma: PrismaClient } ) => {
 
     const userReviews = await prisma.review.findMany({
       where: {
@@ -45,7 +47,7 @@ export const User = {
       }
     })
 
-    return userReviews
+    return userReviews.length ? userReviews : null
   }
   
 };
