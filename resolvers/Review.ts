@@ -8,28 +8,15 @@ export const Review: ReviewResolvers = {
             return await prisma.user.findMany({
               where: {
                 age: {
-                  gt: filter.age
+                  gt: filter.age,
                 },
-                cocktails: {
-                  some: {
-                    id: {
-                      in: userID
-                    }
-                  }
-                }
-              }
-            })
+                id: userID
+            }})
         } else {
             return await prisma.user.findMany({
-              where: {
-                cocktails: {
-                  some: {
-                    id: {
-                      in: userID
-                    }
-                  }
+                where: {
+                    id: userID
                 }
-              }
             })
         }
     },
@@ -42,26 +29,16 @@ export const Review: ReviewResolvers = {
                 name: {
                   contains: filter.name
                 },
-                users: {
-                  some: {
-                    id: {
-                      in: cocktailID
-                    }
-                  }
-                }
+                id: cocktailID
               }
             })
         } else {
             return await prisma.cocktail.findMany({
               where: {
-                users: {
-                  some: {
                     id: {
                       in: cocktailID
                     }
-                  }
                 }
-              }
             })
         }
     }
