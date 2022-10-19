@@ -65,17 +65,17 @@ export const Query: QueryResolvers = {
     }
   },
 
-/*   review: async (parent, { id }, { prisma } ) => {
+  review: async (parent, { id }, { prisma } ) => {
 
     return await prisma.review.findUnique({
       where: {
         id: parseInt(id),
       },
     })
-  }, */
+  },
 
-/*   reviews: async (parent, args, { prisma }) => {
+  reviews: async (parent, args, { prisma }) => {
 
     return await prisma.review.findMany();
-  } */
+  }
 };

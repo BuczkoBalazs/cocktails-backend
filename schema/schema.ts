@@ -57,8 +57,8 @@ export const typeDefs = gql`
     id: Int!
     title: String!
     text: String!
-    userID: User!
-    cocktailID: Cocktail!
+    userID: Int!
+    cocktailID: Int!
   }
 
   input CocktailsFilterInput {

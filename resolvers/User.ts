@@ -34,13 +34,13 @@ export const User: UserResolvers = {
     }
   },
 
-/*   reviews: async ({ id }, args, { prisma } ) => {
+  reviews: async ({ id }, args, { prisma } ) => {
 
     return await prisma.review.findMany({
       where: {
         userID: id
       }
     })
-  } */
+  }
   
 };

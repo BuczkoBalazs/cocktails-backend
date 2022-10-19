@@ -193,11 +193,11 @@ export type QueryUsersArgs = {
 
 export type Review = {
   __typename?: 'Review';
-  cocktailID: Cocktail;
+  cocktailID: Scalars['Int'];
   id: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: User;
+  userID: Scalars['Int'];
 };
 
 export type UpdateCocktailInput = {
@@ -407,11 +407,11 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 }>;
 
 export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
-  cocktailID?: Resolver<ResolversTypes['Cocktail'], ParentType, ContextType>;
+  cocktailID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  userID?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  userID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

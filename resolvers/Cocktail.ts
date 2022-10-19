@@ -34,13 +34,13 @@ export const Cocktail: CocktailResolvers = {
     }
   },
   
-/*   reviews: async ({ id }, args, { prisma }) => {
+  reviews: async ({ id }, args, { prisma }) => {
 
     return await prisma.review.findMany({
       where: {
         cocktailID: id
       }
     })
-  } */
+  }
 
 };
