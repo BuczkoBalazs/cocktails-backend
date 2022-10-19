@@ -202,16 +202,6 @@ export type Review = {
   users?: Maybe<Array<User>>;
 };
 
-
-export type ReviewCocktailsArgs = {
-  filter?: InputMaybe<CocktailsFilterInput>;
-};
-
-
-export type ReviewUsersArgs = {
-  filter?: InputMaybe<UsersFilterInput>;
-};
-
 export type UpdateCocktailInput = {
   favorite: Scalars['Boolean'];
   howTo: Scalars['String'];
@@ -420,12 +410,12 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 
 export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
   cocktailID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cocktails?: Resolver<Maybe<Array<ResolversTypes['Cocktail']>>, ParentType, ContextType, Partial<ReviewCocktailsArgs>>;
+  cocktails?: Resolver<Maybe<Array<ResolversTypes['Cocktail']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType, Partial<ReviewUsersArgs>>;
+  users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

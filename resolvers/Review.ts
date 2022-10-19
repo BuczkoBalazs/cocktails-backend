@@ -2,45 +2,22 @@ import { ReviewResolvers } from "../src/generated/graphql";
 
 export const Review: ReviewResolvers = {
 
-    users: async ({ userID }, { filter }, { prisma }) => {
+  users: async ({ userID }, args, { prisma }) => {
 
-        if(filter) {
-            return await prisma.user.findMany({
-              where: {
-                age: {
-                  gt: filter.age,
-                },
-                id: userID
-            }})
-        } else {
-            return await prisma.user.findMany({
-                where: {
-                    id: userID
-                }
-            })
-        }
-    },
+    return await prisma.user.findMany({
+      where: {
+        id: userID
+      }
+    })
+  },
 
-    cocktails: async ({ cocktailID }, { filter }, { prisma }) => {
+  cocktails: async ({ cocktailID }, args, { prisma }) => {
 
-        if(filter) {
-            return await prisma.cocktail.findMany({
-              where: {
-                name: {
-                  contains: filter.name
-                },
-                id: cocktailID
-              }
-            })
-        } else {
-            return await prisma.cocktail.findMany({
-              where: {
-                    id: {
-                      in: cocktailID
-                    }
-                }
-            })
-        }
-    }
+    return await prisma.cocktail.findMany({
+      where: {
+        id: cocktailID
+      }
+    })
+  }
 
 };
