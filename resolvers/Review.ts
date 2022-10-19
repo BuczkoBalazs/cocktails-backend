@@ -2,22 +2,68 @@ import { ReviewResolvers } from "../src/generated/graphql";
 
 export const Review: ReviewResolvers = {
 
-/*     users: async ({ userID }, args, { prisma }) => {
+    users: async ({ userID }, { filter }, { prisma }) => {
 
-        return await prisma.user.findUnique({
-            where: {
-                id: userID
-            },
-        })
+        if(filter) {
+            return await prisma.user.findMany({
+              where: {
+                age: {
+                  gt: filter.age
+                },
+                cocktails: {
+                  some: {
+                    id: {
+                      in: userID
+                    }
+                  }
+                }
+              }
+            })
+        } else {
+            return await prisma.user.findMany({
+              where: {
+                cocktails: {
+                  some: {
+                    id: {
+                      in: userID
+                    }
+                  }
+                }
+              }
+            })
+        }
     },
 
-    cocktails: async ({ cocktailID }, args, { prisma }) => {
+    cocktails: async ({ cocktailID }, { filter }, { prisma }) => {
 
-        return await prisma.cocktail.findUnique({
-            where: {
-                id: cocktailID
-            },
-        })
-    } */
+        if(filter) {
+            return await prisma.cocktail.findMany({
+              where: {
+                name: {
+                  contains: filter.name
+                },
+                users: {
+                  some: {
+                    id: {
+                      in: cocktailID
+                    }
+                  }
+                }
+              }
+            })
+        } else {
+            return await prisma.cocktail.findMany({
+              where: {
+                users: {
+                  some: {
+                    id: {
+                      in: cocktailID
+                    }
+                  }
+                }
+              }
+            })
+        }
+    }
 
 };
