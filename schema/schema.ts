@@ -28,7 +28,7 @@ export const typeDefs = gql`
   }
 
   type Cocktail {
-    id: ID!
+    id: Int!
     name: String!
     howTo: String!
     ingredients: String!
@@ -39,13 +39,13 @@ export const typeDefs = gql`
   }
 
   type LandingSlide {
-    id: ID!
+    id: Int!
     title: String!
     text: String!
   }
 
   type User {
-    id: ID!
+    id: Int!
     name: String!
     email: String!
     age: Int!
@@ -54,19 +54,21 @@ export const typeDefs = gql`
   }
 
   type Review {
-    id: ID!
+    id: Int!
     title: String!
     text: String!
-    userID: User!
-    cocktailID: Cocktail!
+    users: User
+    userID: Int!
+    cocktails: Cocktail
+    cocktailID: Int!
   }
 
   input CocktailsFilterInput {
-    name: String
+    name: String!
   }
   
   input UsersFilterInput {
-    age: Int
+    age: Int!
   }
 
   input AddLandingSlideInput {
@@ -89,8 +91,8 @@ export const typeDefs = gql`
   input UpdateReviewInput {
     title: String!
     text: String!
-    userID: ID!
-    cocktailID: ID!
+    userID: Int!
+    cocktailID: Int!
   }
 
   input AddUserInput {
