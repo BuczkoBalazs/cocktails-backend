@@ -4,7 +4,7 @@ export const Review: ReviewResolvers = {
 
   users: async ({ userID }, args, { prisma }) => {
 
-    return await prisma.user.findMany({
+    return await prisma.user.findUnique({
       where: {
         id: userID
       }
@@ -13,7 +13,7 @@ export const Review: ReviewResolvers = {
 
   cocktails: async ({ cocktailID }, args, { prisma }) => {
 
-    return await prisma.cocktail.findMany({
+    return await prisma.cocktail.findUnique({
       where: {
         id: cocktailID
       }
