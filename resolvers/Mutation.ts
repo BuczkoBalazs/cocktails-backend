@@ -56,7 +56,7 @@ export const Mutation: MutationResolvers = {
         return true
     },
 
-    updateReview: async (parent: any, { id, input }, { prisma }) => {
+    updateReview: async (parent, { id, input }, { prisma }) => {
 
         const { title, text, userID, cocktailID} = input
 
@@ -73,7 +73,7 @@ export const Mutation: MutationResolvers = {
         });
     },
 
-    addUser: async (parent: any, { input } , { prisma }) => {
+    addUser: async (parent, { input } , { prisma }) => {
 
         return await prisma.user.create({
             data:{ ...input }
@@ -120,7 +120,7 @@ export const Mutation: MutationResolvers = {
         });
     },
 
-    deleteCocktail: async (parent: any, { id }, { prisma }) => {
+    deleteCocktail: async (parent, { id }, { prisma }) => {
 
         const deleteReviews = prisma.review.deleteMany({
             where: {
