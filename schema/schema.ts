@@ -57,9 +57,9 @@ export const typeDefs = gql`
     id: Int!
     title: String!
     text: String!
-    users: User
+    user: User
     userID: Int!
-    cocktails: Cocktail
+    cocktail: Cocktail
     cocktailID: Int!
   }
 

@@ -193,13 +193,13 @@ export type QueryUsersArgs = {
 
 export type Review = {
   __typename?: 'Review';
+  cocktail?: Maybe<Cocktail>;
   cocktailID: Scalars['Int'];
-  cocktails?: Maybe<Cocktail>;
   id: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
+  user?: Maybe<User>;
   userID: Scalars['Int'];
-  users?: Maybe<User>;
 };
 
 export type UpdateCocktailInput = {
@@ -409,13 +409,13 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 }>;
 
 export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
+  cocktail?: Resolver<Maybe<ResolversTypes['Cocktail']>, ParentType, ContextType>;
   cocktailID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cocktails?: Resolver<Maybe<ResolversTypes['Cocktail']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   userID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  users?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
