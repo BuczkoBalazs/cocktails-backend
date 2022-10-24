@@ -38,7 +38,9 @@ export const User: UserResolvers = {
 
     return await prisma.review.findMany({
       where: {
-        userID: id
+        user: {
+          id: id
+        }
       }
     })
   }

@@ -38,7 +38,9 @@ export const Cocktail: CocktailResolvers = {
 
     return await prisma.review.findMany({
       where: {
-        cocktailID: id
+        cocktail: {
+          id: id
+        }
       }
     })
   }
