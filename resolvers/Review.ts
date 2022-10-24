@@ -2,20 +2,20 @@ import { ReviewResolvers } from "../src/generated/graphql";
 
 export const Review: ReviewResolvers = {
 
-  user: async ({ userID }, args, { prisma }) => {
+  user: async ({ user }, args, { prisma }) => {
 
     return await prisma.user.findUnique({
       where: {
-        id: userID
+        id: user?.id
       }
     })
   },
 
-  cocktail: async ({ cocktailID }, args, { prisma }) => {
+  cocktail: async ({ cocktail }, args, { prisma }) => {
 
     return await prisma.cocktail.findUnique({
       where: {
-        id: cocktailID
+        id: cocktail?.id
       }
     })
   }
