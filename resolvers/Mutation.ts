@@ -67,8 +67,8 @@ export const Mutation: MutationResolvers = {
             data: {
                 title: title,
                 text: text,
-                userID: userID,
-                cocktailID: cocktailID
+                userID: parseInt(userID),
+                cocktailID: parseInt(cocktailID)
             }
         });
     },

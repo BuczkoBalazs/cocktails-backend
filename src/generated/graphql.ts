@@ -216,10 +216,10 @@ export type UpdateLandingSlideInput = {
 };
 
 export type UpdateReviewInput = {
-  cocktailID: Scalars['Int'];
+  cocktailID: Scalars['ID'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: Scalars['Int'];
+  userID: Scalars['ID'];
 };
 
 export type UpdateUserInput = {
