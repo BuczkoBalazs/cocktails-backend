@@ -29,10 +29,10 @@ export type AddLandingSlideInput = {
 };
 
 export type AddReviewInput = {
-  cocktailID: Scalars['ID'];
+  postedAbout: Scalars['ID'];
+  postedBy: Scalars['ID'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: Scalars['ID'];
 };
 
 export type AddUserInput = {
@@ -193,13 +193,11 @@ export type QueryUsersArgs = {
 
 export type Review = {
   __typename?: 'Review';
-  cocktailID: Scalars['Int'];
-  cocktails?: Maybe<Cocktail>;
+  cocktail?: Maybe<Cocktail>;
   id: Scalars['Int'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: Scalars['Int'];
-  users?: Maybe<User>;
+  user?: Maybe<User>;
 };
 
 export type UpdateCocktailInput = {
@@ -216,10 +214,10 @@ export type UpdateLandingSlideInput = {
 };
 
 export type UpdateReviewInput = {
-  cocktailID: Scalars['Int'];
+  postedAbout: Scalars['ID'];
+  postedBy: Scalars['ID'];
   text: Scalars['String'];
   title: Scalars['String'];
-  userID: Scalars['Int'];
 };
 
 export type UpdateUserInput = {
@@ -409,13 +407,11 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 }>;
 
 export type ReviewResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
-  cocktailID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cocktails?: Resolver<Maybe<ResolversTypes['Cocktail']>, ParentType, ContextType>;
+  cocktail?: Resolver<Maybe<ResolversTypes['Cocktail']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  userID?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  users?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

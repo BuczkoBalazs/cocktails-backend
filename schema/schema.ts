@@ -57,10 +57,8 @@ export const typeDefs = gql`
     id: Int!
     title: String!
     text: String!
-    users: User
-    userID: Int!
-    cocktails: Cocktail
-    cocktailID: Int!
+    user: User
+    cocktail: Cocktail
   }
 
   input CocktailsFilterInput {
@@ -84,15 +82,15 @@ export const typeDefs = gql`
   input AddReviewInput {
     title: String!
     text: String!
-    userID: ID!
-    cocktailID: ID!
+    postedBy: ID!
+    postedAbout: ID!
   }
 
   input UpdateReviewInput {
     title: String!
     text: String!
-    userID: Int!
-    cocktailID: Int!
+    postedBy: ID!
+    postedAbout: ID!
   }
 
   input AddUserInput {
