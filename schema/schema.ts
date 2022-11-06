@@ -25,8 +25,8 @@ export const typeDefs = gql`
     addCocktail(input: AddCocktailInput!): Cocktail!
     deleteCocktail(id: ID!): Boolean!
     updateCocktail(id: ID!, input: UpdateCocktailInput!): Cocktail!
-    connectUser(input: CocktailUserConnectionInput!): Boolean!
-    disconnectUser(input: CocktailUserConnectionInput!): Boolean!
+    connectUser(input: CocktailUserConnectionInput!): Cocktail!
+    disconnectUser(input: CocktailUserConnectionInput!): Cocktail!
   }
 
   type Cocktail {
