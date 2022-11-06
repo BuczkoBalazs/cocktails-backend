@@ -149,6 +149,38 @@ export const Mutation: MutationResolvers = {
                 ...input
             }
         });
+    },
+
+    connectUser: async (parent, { input }, { prisma }) => {
+        await prisma.cocktail.update({
+            where: {
+                id: input.cocktailID
+            },
+            data: {
+                users: {
+                    connect: {
+                        id: input.userID
+                    }
+                }
+            }
+        })
+        return true
+    },
+
+    disconnectUser: async (parent, { input }, { prisma }) => {
+        await prisma.cocktail.update({
+            where: {
+                id: input.cocktailID
+            },
+            data: {
+                users: {
+                    disconnect: {
+                        id: input.userID
+                    }
+                }
+            }
+        })
+        return true
     }
 
 }

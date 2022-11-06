@@ -25,6 +25,8 @@ export const typeDefs = gql`
     addCocktail(input: AddCocktailInput!): Cocktail!
     deleteCocktail(id: ID!): Boolean!
     updateCocktail(id: ID!, input: UpdateCocktailInput!): Cocktail!
+    connectUser(input: CocktailUserConnectionInput!): Boolean!
+    disconnectUser(input: CocktailUserConnectionInput!): Boolean!
   }
 
   type Cocktail {
@@ -121,5 +123,10 @@ export const typeDefs = gql`
     ingredients: String!
     image: String!
     favorite: Boolean!
+  }
+
+  input CocktailUserConnectionInput {
+    userID: Int!
+    cocktailID: Int!
   }
 `;

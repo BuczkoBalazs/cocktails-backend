@@ -58,6 +58,11 @@ export type CocktailUsersArgs = {
   filter?: InputMaybe<UsersFilterInput>;
 };
 
+export type CocktailUserConnectionInput = {
+  cocktailID: Scalars['Int'];
+  userID: Scalars['Int'];
+};
+
 export type CocktailsFilterInput = {
   name: Scalars['String'];
 };
@@ -75,10 +80,12 @@ export type Mutation = {
   addLandingSlide: LandingSlide;
   addReview: Review;
   addUser: User;
+  connectUser: Scalars['Boolean'];
   deleteCocktail: Scalars['Boolean'];
   deleteLandingSlide: Scalars['Boolean'];
   deleteReview: Scalars['Boolean'];
   deleteUser: Scalars['Boolean'];
+  disconnectUser: Scalars['Boolean'];
   updateCocktail: Cocktail;
   updateLandingSlide: LandingSlide;
   updateReview: Review;
@@ -106,6 +113,11 @@ export type MutationAddUserArgs = {
 };
 
 
+export type MutationConnectUserArgs = {
+  input: CocktailUserConnectionInput;
+};
+
+
 export type MutationDeleteCocktailArgs = {
   id: Scalars['ID'];
 };
@@ -123,6 +135,11 @@ export type MutationDeleteReviewArgs = {
 
 export type MutationDeleteUserArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationDisconnectUserArgs = {
+  input: CocktailUserConnectionInput;
 };
 
 
@@ -323,6 +340,7 @@ export type ResolversTypes = ResolversObject<{
   AddUserInput: AddUserInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Cocktail: ResolverTypeWrapper<Cocktail>;
+  CocktailUserConnectionInput: CocktailUserConnectionInput;
   CocktailsFilterInput: CocktailsFilterInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -347,6 +365,7 @@ export type ResolversParentTypes = ResolversObject<{
   AddUserInput: AddUserInput;
   Boolean: Scalars['Boolean'];
   Cocktail: Cocktail;
+  CocktailUserConnectionInput: CocktailUserConnectionInput;
   CocktailsFilterInput: CocktailsFilterInput;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -387,10 +406,12 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   addLandingSlide?: Resolver<ResolversTypes['LandingSlide'], ParentType, ContextType, RequireFields<MutationAddLandingSlideArgs, 'input'>>;
   addReview?: Resolver<ResolversTypes['Review'], ParentType, ContextType, RequireFields<MutationAddReviewArgs, 'input'>>;
   addUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationAddUserArgs, 'input'>>;
+  connectUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationConnectUserArgs, 'input'>>;
   deleteCocktail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCocktailArgs, 'id'>>;
   deleteLandingSlide?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteLandingSlideArgs, 'id'>>;
   deleteReview?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteReviewArgs, 'id'>>;
   deleteUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
+  disconnectUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDisconnectUserArgs, 'input'>>;
   updateCocktail?: Resolver<ResolversTypes['Cocktail'], ParentType, ContextType, RequireFields<MutationUpdateCocktailArgs, 'id' | 'input'>>;
   updateLandingSlide?: Resolver<ResolversTypes['LandingSlide'], ParentType, ContextType, RequireFields<MutationUpdateLandingSlideArgs, 'id' | 'input'>>;
   updateReview?: Resolver<ResolversTypes['Review'], ParentType, ContextType, RequireFields<MutationUpdateReviewArgs, 'id' | 'input'>>;
