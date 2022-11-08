@@ -1,9 +1,11 @@
-export const Cocktail = {
+import { CocktailResolvers } from "../src/generated/graphql";
+
+export const Cocktail: CocktailResolvers = {
   
   users: async ({ id }, { filter }, { prisma }) => {
 
     if(filter) {
-      const userOfCocktail = await prisma.user.findMany({
+      return await prisma.user.findMany({
         where: {
           age: {
             gt: filter.age
@@ -17,11 +19,8 @@ export const Cocktail = {
           }
         }
       })
-
-      return userOfCocktail
-
     } else {
-      const userOfCocktail = await prisma.user.findMany({
+      return await prisma.user.findMany({
         where: {
           cocktails: {
             some: {
@@ -32,20 +31,18 @@ export const Cocktail = {
           }
         }
       })
-
-      return userOfCocktail
     }
   },
   
   reviews: async ({ id }, args, { prisma }) => {
 
-    const cocktailReviews = await prisma.review.findMany({
+    return await prisma.review.findMany({
       where: {
-        cocktailID: id
+        cocktail: {
+          id: id
+        }
       }
     })
-
-    return cocktailReviews
   }
 
 };
